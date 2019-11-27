@@ -1,0 +1,14 @@
+version: '3'
+services:
+  nginx:
+    build: nginx/.
+    volumes:
+      - /tmp/data-collector:/var/log/
+    ports:
+      - "8080:80"
+  fluentd:
+    build: fluentd/.
+    volumes:
+      - /tmp/data-collector:/var/log/
+    ports:
+      - "8888:24224"
