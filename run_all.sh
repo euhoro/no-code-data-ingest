@@ -13,5 +13,7 @@ mkdir /tmp/data-collector/fluentd/td-agent
 touch /tmp/data-collector/fluentd/td-agent/access.log.pos
 chmod 666 /tmp/data-collector/fluentd/td-agent/access.log.pos
 
+chmod -R 777 /tmp/data-collector
+
 # run docker-compose
 docker-compose up --force-recreate --build
