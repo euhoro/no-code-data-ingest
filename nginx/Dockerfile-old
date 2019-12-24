@@ -1,0 +1,6 @@
+# TODO: pack our own image
+# Containing NGINX and echo-module  
+FROM yannrobert/docker-nginx
+
+#RUN rm /etc/nginx/conf.d/*
+ADD data-ingest.conf /etc/nginx/conf.d/
