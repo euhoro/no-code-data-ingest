@@ -13,38 +13,37 @@ services:
     ports:
       - "8888:24224"
 
-  # Elasticsearch Docker Images: https://www.docker.elastic.co/
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
-    container_name: elasticsearch
-    environment:
-      - xpack.security.enabled=false
-      - discovery.type=single-node
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-      nofile:
-        soft: 65536
-        hard: 65536
-    cap_add:
-      - IPC_LOCK
-    volumes:
-      - elasticsearch-data:/usr/share/elasticsearch/data
-    ports:
-      - 9200:9200
-      - 9300:9300
-
-  kibana:
-    container_name: kibana
-    image: docker.elastic.co/kibana/kibana:7.4.0
-    environment:
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-    ports:
-      - 5601:5601
-    depends_on:
-      - elasticsearch
-
+ services:
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
+        container_name: elasticsearch
+        environment:
+            - discovery.type=single-node
+            - ES_JAVA_OPTS="-Xms1g -Xmx1g"
+        volumes:
+            - vibhuviesdata:/usr/share/elasticsearch/data
+        ports:
+            - 9200:9200
+        networks:
+            - elastic
+        labels:
+            - co.elastic.logs/module=elasticsearch
+            - co.elastic.metrics/module=elasticsearch
+    kibana:
+        image: docker.elastic.co/kibana/kibana:7.7.0
+        container_name: kibana
+        ports:
+            - 5601:5601
+        depends_on:
+            - elasticsearch
+        environment:
+            ELASTICSEARCH_URL: http://elasticsearch:9200
+            ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+        networks:
+            - elastic
+networks:
+    elastic:
+      driver: bridge  
 volumes:
-  elasticsearch-data:
-    driver: local
+    vibhuviesdata:
+      driver: local
