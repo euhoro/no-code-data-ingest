@@ -27,6 +27,7 @@ RUN apk update \
  && gem install fluentd -v 0.14.25 \
  && gem install fluent-plugin-kafka --no-document \
  && gem install fluent-plugin-s3 -v 1.0.0 --no-document \
+ && gem install fluent-plugin-mongo -v 1.0.0 --no-document \
  && apk del .build-deps \
  && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
 
