@@ -6,7 +6,7 @@ No-code data ingest for data pipelines nginx->fluentd->elasticsearch->kibana
 2. Perform chmod 755 on all .sh files
 3. Run './run_all.sh'
 4. Run curl localhost:8081/event?msg=testing no-code-data-ingest
-5. Ensure that you can see your message in fluntd ouput
+5. Ensure that you can see your message in fluentd ouput
 
 6. import manually the dashboard in http://localhost:5601/app/management/kibana/objects
 file location kibana/export.ndjson
