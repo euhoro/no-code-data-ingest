@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:3.6
 LABEL maintainer ""
 LABEL Description="Fluentd docker image" Vendor="Fluent Organization" Version="1.1"
 
@@ -25,9 +25,8 @@ RUN apk update \
  && gem install oj -v 2.18.3 \
  && gem install json -v 2.1.0 \
  && gem install fluentd -v 0.14.25 \
- && gem install fluent-plugin-kafka --no-document \
  && gem install fluent-plugin-s3 -v 1.0.0 --no-document \
- && gem install fluent-plugin-mongo -v 1.4.1 --no-document \
+ && gem install fluent-plugin-elasticsearch -v 4.2.0 --no-document \
  && apk del .build-deps \
  && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
 
